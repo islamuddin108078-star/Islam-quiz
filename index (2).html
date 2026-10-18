@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>নবীদের জীবনী কুইজ ও রিওয়ার্ড ওয়ালেট</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0C5E28;
+            --primary-dark: #073818;
+            --primary-light: #E8F7ED;
+            --gold: #D4AF37;
+            --gold-dark: #9E7B15;
+            --gold-bg: #FFF3CD;
+            --bkash: #E2136E;
+            --bkash-bg: #FFEBF3;
+            --nagad: #F7941D;
+            --nagad-bg: #FFF2E2;
+            --rocket: #8C3494;
+            --rocket-bg: #F7EBF8;
+            --bg: #F5F9F6;
+            --surface: #FFFFFF;
+            --text-main: #141D17;
+            --text-muted: #596B5F;
+            --success: #2E7D32;
+            --danger: #C62828;
+            --border: #DDE7DF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Hind Siliguri', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        #app-container {
+            width: 100%;
+            max-width: 480px;
+            background: var(--surface);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 0 24px rgba(0,0,0,0.08);
+            padding-bottom: 75px;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background: var(--surface);
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .app-title-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .app-logo-badge {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        .app-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-main);
+            line-height: 1.2;
+        }
+        .app-subtitle {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+        .top-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .icon-btn {
+            background: var(--primary-light);
+            border: none;
+            color: var(--primary);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            font-size: 16px;
+        }
+        .badge-counter {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background: var(--bkash);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            width: 17px;
+            height: 17px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Content Area */
+        .content-scroll {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* 1. TOP WALLET CARD */
+        .wallet-card {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary), #0D682D);
+            border-radius: 20px;
+            padding: 20px;
+            color: #fff;
+            box-shadow: 0 10px 20px rgba(12, 94, 40, 0.22);
+            position: relative;
+            overflow: hidden;
+        }
+        .wallet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .wallet-title-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .wallet-title {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.85);
+        }
+        .mode-badge {
+            background: var(--gold-bg);
+            color: #856404;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .mode-badge.live {
+            background: #D1F2D9;
+            color: var(--success);
+        }
+        .wallet-balance-row {
+            margin: 14px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        .balance-label {
+            font-size: 11px;
+            color: var(--gold);
+            font-weight: 600;
+        }
+        .balance-amount {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+        .withdrawable-text {
+            font-size: 12px;
+            color: #D5F2DD;
+            margin-top: 2px;
+        }
+        .eye-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: #fff;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        .wallet-stats-grid {
+            background: rgba(0, 0, 0, 0.22);
+            border-radius: 14px;
+            padding: 10px 14px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .stat-label {
+            font-size: 11px;
+            color: rgba(255,255,255,0.8);
+        }
+        .stat-val {
+            font-size: 13px;
+            font-weight: 700;
+            color: #fff;
+        }
+        .wallet-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 16px;
+        }
+        .btn-withdraw {
+            background: var(--gold);
+            color: #352600;
+            border: none;
+            padding: 10px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .btn-daily-rewards {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            padding: 10px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        /* Banner Card */
+        .info-card {
+            background: var(--gold-bg);
+            border-radius: 14px;
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #634A00;
+        }
+        .info-card h4 {
+            font-size: 13px;
+            font-weight: 700;
+        }
+        .info-card p {
+            font-size: 11px;
+            line-height: 1.4;
+            color: #7A5B00;
+        }
+
+        /* Quiz Banner CTA */
+        .cta-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            cursor: pointer;
+        }
+        .cta-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cta-btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .progress-bar-bg {
+            background: var(--primary-light);
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            background: var(--primary);
+            height: 100%;
+            width: 30%;
+            transition: width 0.3s;
+        }
+
+        /* Prophet Cards Horizontal Scroll */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 4px;
+        }
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-main);
+        }
+        .horizontal-list {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 6px;
+            scrollbar-width: none;
+        }
+        .horizontal-list::-webkit-scrollbar {
+            display: none;
+        }
+        .prophet-mini-card {
+            min-width: 200px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            flex-shrink: 0;
+        }
+        .prophet-era {
+            font-size: 10px;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+        .prophet-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+        .prophet-title-tag {
+            font-size: 11px;
+            color: var(--gold-dark);
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        /* Quiz Screen Elements */
+        .quiz-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+        }
+        .quiz-meta-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .reward-tag {
+            background: var(--gold-bg);
+            color: var(--gold-dark);
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        .reward-tag.claimed {
+            background: #E8F5E9;
+            color: var(--success);
+        }
+        .question-text {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.4;
+            color: var(--text-main);
+            margin-bottom: 16px;
+        }
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option-item {
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option-item.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+        .option-item.correct {
+            border-color: var(--success);
+            background: #E8F5E9;
+        }
+        .option-item.wrong {
+            border-color: var(--danger);
+            background: #FFEBEE;
+        }
+        .option-letter {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-muted);
+        }
+        .option-item.selected .option-letter {
+            background: var(--primary);
+            color: #fff;
+        }
+        .option-item.correct .option-letter {
+            background: var(--success);
+            color: #fff;
+        }
+        .option-item.wrong .option-letter {
+            background: var(--danger);
+            color: #fff;
+        }
+        .explanation-box {
+            background: #F9FBF9;
+            border-left: 3px solid var(--primary);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 14px;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* Withdrawal Screen Elements */
+        .gateway-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+        }
+        .gateway-card {
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .gateway-card.bkash.active {
+            border-color: var(--bkash);
+            background: var(--bkash-bg);
+        }
+        .gateway-card.nagad.active {
+            border-color: var(--nagad);
+            background: var(--nagad-bg);
+        }
+        .gateway-card.rocket.active {
+            border-color: var(--rocket);
+            background: var(--rocket-bg);
+        }
+        .gateway-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin: 0 auto 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #fff;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .form-label {
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+        }
+        .form-input:focus {
+            border-color: var(--primary);
+        }
+        .amount-chips {
+            display: flex;
+            gap: 8px;
+        }
+        .amount-chip {
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .amount-chip.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        /* SMS Simulation Alert Card */
+        .sms-bubble {
+            background: #212529;
+            color: #F8F9FA;
+            border-radius: 12px;
+            padding: 14px;
+            font-family: monospace;
+            font-size: 12px;
+            line-height: 1.5;
+            position: relative;
+        }
+        .sms-header {
+            display: flex;
+            justify-content: space-between;
+            color: #ADB5BD;
+            font-size: 11px;
+            margin-bottom: 6px;
+        }
+
+        /* Modal / Popup */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            padding: 20px;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-content {
+            background: #fff;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 420px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: popIn 0.3s ease;
+        }
+        @keyframes popIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Bottom Navigation Bar */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 480px;
+            background: #fff;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            border-top: 1px solid var(--border);
+            z-index: 50;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 11px;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            width: 20%;
+        }
+        .nav-item.active {
+            color: var(--primary);
+            font-weight: 700;
+        }
+        .nav-icon {
+            font-size: 18px;
+        }
+
+        .btn-full {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app-container">
+    <!-- Top Bar -->
+    <header class="top-bar">
+        <div class="app-title-group">
+            <div class="app-logo-badge">☪</div>
+            <div>
+                <h1 class="app-title">নবীদের জীবনী কুইজ</h1>
+                <p class="app-subtitle">প্রতিদিন কুইজ খেলে রিওয়ার্ড ওয়ালেট</p>
+            </div>
+        </div>
+        <div class="top-actions">
+            <button class="icon-btn" onclick="switchTab('inbox')" title="মেসেজ ইনবক্স">
+                📩
+                <span class="badge-counter" id="unread-count">1</span>
+            </button>
+            <button class="icon-btn" onclick="switchTab('admin')" title="অ্যাডমিন প্যানেল">⚙️</button>
+        </div>
+    </header>
+
+    <!-- Main Screens View -->
+    <main class="content-scroll" id="screen-home">
+        <!-- 1. TOP WALLET CARD -->
+        <section class="wallet-card">
+            <div class="wallet-header">
+                <div class="wallet-title-row">
+                    <span>💳</span>
+                    <span class="wallet-title">রিওয়ার্ড ওয়ালেট ব্যালেন্স</span>
+                </div>
+                <div class="mode-badge" id="mode-badge" onclick="toggleMode()">
+                    <span>ℹ️</span> <span id="mode-text">ডেমো মোড (ভার্চুয়াল)</span>
+                </div>
+            </div>
+
+            <div class="wallet-balance-row">
+                <div>
+                    <div class="balance-label">💰 মোট রিওয়ার্ড ব্যালেন্স</div>
+                    <div class="balance-amount" id="balance-display">১৫০ টাকা</div>
+                    <div class="withdrawable-text" id="withdrawable-display">💸 উত্তোলনযোগ্য: ১৫০ টাকা</div>
+                </div>
+                <button class="eye-btn" onclick="toggleBalanceVisibility()" id="eye-btn" title="ব্যালেন্স দেখান বা লুকান">👁️</button>
+            </div>
+
+            <div class="wallet-stats-grid">
+                <div class="stat-item">
+                    <span>📅</span>
+                    <div>
+                        <div class="stat-label">আজকের রিওয়ার্ড</div>
+                        <div class="stat-val" id="today-earned-display">৩০ টাকা</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <span>🏆</span>
+                    <div>
+                        <div class="stat-label">আজকের সঠিক উত্তর</div>
+                        <div class="stat-val" id="today-correct-display">৩টি</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wallet-actions">
+                <button class="btn-withdraw" onclick="switchTab('withdraw')">💸 টাকা উত্তোলন</button>
+                <button class="btn-daily-rewards" onclick="switchTab('earnings')">📊 আজকের আয়</button>
+            </div>
+        </section>
+
+        <!-- Reward Notice Banner -->
+        <div class="info-card">
+            <div style="font-size:24px;">🎁</div>
+            <div>
+                <h4>প্রতিটি সঠিক উত্তরে ১০ টাকা রিওয়ার্ড!</h4>
+                <p>কুইজে সঠিক উত্তর দিলে সার্ভার যাচাই শেষে সাথে সাথে আপনার ওয়ালেটে রিওয়ার্ড যুক্ত হবে। বিকাশ, নগদ ও রকেটে উত্তোলনযোগ্য।</p>
+            </div>
+        </div>
+
+        <!-- Daily Quiz Card -->
+        <div class="cta-card" onclick="switchTab('quiz')">
+            <div class="cta-header">
+                <div>
+                    <h3 style="font-size: 15px; font-weight:700;">আজকের ২০টি প্রশ্নের কুইজ</h3>
+                    <p style="font-size: 11px; color: var(--text-muted);">নবীদের প্রামাণ্য জীবনীভিত্তিক কুইজ খেলুন</p>
+                </div>
+                <button class="cta-btn">খেলুন</button>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="home-progress-bar"></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--text-muted); margin-top:4px;">
+                <span>দৈনিক অগ্রগতি (<span id="progress-text">৩/১০ সঠিক</span>)</span>
+                <span id="progress-pct">৩০%</span>
+            </div>
+        </div>
+
+        <!-- Prophet Biographies Preview -->
+        <div class="section-header">
+            <h3 class="section-title">📖 নবীদের জীবনী পাঠ</h3>
+            <span style="font-size:12px; color:var(--primary); font-weight:700; cursor:pointer;" onclick="switchTab('prophets')">সকল দেখুন →</span>
+        </div>
+        <div class="horizontal-list">
+            <div class="prophet-mini-card" onclick="switchTab('prophets')">
+                <span class="prophet-era">সৃষ্টির প্রারম্ভ কাল</span>
+                <h4 class="prophet-name">হযরত আদম (আ.)</h4>
+                <div class="prophet-title-tag">মানবজাতির আদি পিতা</div>
+                <p style="font-size:11px; color:var(--text-muted);">আল্লাহ তাআলার সৃষ্ট প্রথম মানব ও নবী। জান্নাত থেকে পৃথিবীতে আগমনের সূচনা...</p>
+            </div>
+            <div class="prophet-mini-card" onclick="switchTab('prophets')">
+                <span class="prophet-era">মহাপ্লাবনের যুগ</span>
+                <h4 class="prophet-name">হযরত নূহ (আ.)</h4>
+                <div class="prophet-title-tag">নাজিয়্যুল্লাহ (দ্বিতীয় আদম)</div>
+                <p style="font-size:11px; color:var(--text-muted);">সাড়ে নয়শত বছর ধরে তাওহীদের দিকে আহ্বানকারী এবং মহাপ্লাবনে মুমিনদের রক্ষাকারী...</p>
+            </div>
+            <div class="prophet-mini-card" onclick="switchTab('prophets')">
+                <span class="prophet-era">খ্রিস্টপূর্ব ২০০০ অব্দ</span>
+                <h4 class="prophet-name">হযরত ইব্রাহিম (আ.)</h4>
+                <div class="prophet-title-tag">খলিলুল্লাহ (আল্লাহর বন্ধু)</div>
+                <p style="font-size:11px; color:var(--text-muted);">অগ্নিকুণ্ড থেকে অক্ষত রক্ষাপ্রাপ্ত এবং পবিত্র কাবার পুনর্নির্মাতা মহীয়সী নবী...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Quiz Screen -->
+    <main class="content-scroll" id="screen-quiz" style="display:none;">
+        <div class="quiz-card">
+            <div class="quiz-meta-row">
+                <span style="font-size:12px; font-weight:700; color:var(--primary);" id="quiz-q-num">প্রশ্ন ১ / ২২</span>
+                <span class="reward-tag" id="quiz-reward-tag">+১০ টাকা রিওয়ার্ড</span>
+            </div>
+            <div class="prophet-era" id="quiz-prophet-badge">হযরত আদম (আ.)</div>
+            <h3 class="question-text" id="quiz-question-text">আল্লাহ তাআলা প্রথম মানব হযরত আদম (আ.)-কে কী দিয়ে সৃষ্টি করেছিলেন?</h3>
+
+            <div class="options-list" id="quiz-options-container">
+                <!-- Injected via JS -->
+            </div>
+
+            <div class="explanation-box" id="quiz-explanation" style="display:none;">
+                <!-- Injected via JS -->
+            </div>
+
+            <div style="margin-top:16px;">
+                <button class="btn-full btn-primary" id="btn-submit-quiz" onclick="submitAnswer()">উত্তর যাচাই ও রিওয়ার্ড গ্রহণ করুন</button>
+                <button class="btn-full btn-primary" id="btn-next-quiz" style="display:none; margin-top:8px;" onclick="nextQuestion()">পরবর্তী প্রশ্ন →</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Earnings / Daily Rewards Screen -->
+    <main class="content-scroll" id="screen-earnings" style="display:none;">
+        <div class="wallet-card" style="padding:16px;">
+            <h3 style="font-size:15px; margin-bottom:12px;">📊 আজকের আয়ের বিস্তারিত খতিয়ান</h3>
+            <div class="wallet-stats-grid" style="grid-template-columns:1fr 1fr; background:rgba(0,0,0,0.25);">
+                <div class="stat-item">
+                    <span>📝</span>
+                    <div>
+                        <div class="stat-label">আজকের উত্তর</div>
+                        <div class="stat-val" id="earnings-attempted">৪টি</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <span>✅</span>
+                    <div>
+                        <div class="stat-label">সঠিক উত্তর</div>
+                        <div class="stat-val" id="earnings-correct">৩টি</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <span>💰</span>
+                    <div>
+                        <div class="stat-label">আজ অর্জিত</div>
+                        <div class="stat-val" id="earnings-today">৩০ টাকা</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <span>🏦</span>
+                    <div>
+                        <div class="stat-label">মোট জমা ব্যালেন্স</div>
+                        <div class="stat-val" id="earnings-total">১৫০ টাকা</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h4 style="font-size:14px; margin-top:8px;">লেনদেন ও রিওয়ার্ড হিস্ট্রি</h4>
+        <div id="transactions-list" style="display:flex; flex-direction:column; gap:10px;">
+            <!-- Injected via JS -->
+        </div>
+    </main>
+
+    <!-- Withdraw Screen -->
+    <main class="content-scroll" id="screen-withdraw" style="display:none;">
+        <div class="cta-card">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                    <div style="font-size:12px; color:var(--text-muted);">উত্তোলনযোগ্য ব্যালেন্স</div>
+                    <div style="font-size:24px; font-weight:700; color:var(--primary);" id="withdraw-balance-val">১৫০ টাকা</div>
+                </div>
+                <div class="mode-badge" onclick="toggleMode()">
+                    <span id="withdraw-mode-tag">ডেমো মোড</span>
+                </div>
+            </div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">সর্বনিম্ন উত্তোলন: ১০০ টাকা • কোনো ফি নেই (০.০০ টাকা)</div>
+        </div>
+
+        <div class="cta-card" style="display:flex; flex-direction:column; gap:14px;">
+            <div class="form-group">
+                <label class="form-label">১. পেমেন্ট মেথড নির্বাচন করুন</label>
+                <div class="gateway-selector">
+                    <div class="gateway-card bkash active" id="gw-bkash" onclick="selectGateway('bKash')">
+                        <div class="gateway-icon" style="background:var(--bkash);">ব</div>
+                        <div style="font-size:12px; font-weight:700; color:var(--bkash);">বিকাশ</div>
+                        <div style="font-size:10px; color:var(--text-muted);">bKash</div>
+                    </div>
+                    <div class="gateway-card nagad" id="gw-nagad" onclick="selectGateway('Nagad')">
+                        <div class="gateway-icon" style="background:var(--nagad);">ন</div>
+                        <div style="font-size:12px; font-weight:700; color:var(--nagad);">নগদ</div>
+                        <div style="font-size:10px; color:var(--text-muted);">Nagad</div>
+                    </div>
+                    <div class="gateway-card rocket" id="gw-rocket" onclick="selectGateway('Rocket')">
+                        <div class="gateway-icon" style="background:var(--rocket);">র</div>
+                        <div style="font-size:12px; font-weight:700; color:var(--rocket);">রকেট</div>
+                        <div style="font-size:10px; color:var(--text-muted);">Rocket</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" id="acc-label">২. বিকাশ অ্যাকাউন্ট নম্বর (১১ ডিজিট)</label>
+                <input type="tel" class="form-input" id="withdraw-phone" placeholder="017XXXXXXXX" maxlength="11" value="01712345678">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">৩. উত্তোলনের পরিমাণ (টাকা)</label>
+                <input type="number" class="form-input" id="withdraw-amount" placeholder="১০০" value="100">
+                <div class="amount-chips">
+                    <div class="amount-chip active" onclick="setWithdrawAmt(100)">১০০৳</div>
+                    <div class="amount-chip" onclick="setWithdrawAmt(150)">১৫০৳</div>
+                    <div class="amount-chip" onclick="setWithdrawAmt(200)">২০০৳</div>
+                    <div class="amount-chip" onclick="setWithdrawAmt(500)">৫০০৳</div>
+                </div>
+            </div>
+
+            <div style="background:#E8F5E9; border-radius:10px; padding:10px; display:flex; gap:8px; align-items:center;">
+                <span style="font-size:18px;">🔒</span>
+                <span style="font-size:11px; color:#1B5E20; line-height:1.4;">কঠোর নিরাপত্তা: কোনো পেমেন্ট PIN বা OTP কখনো চাওয়া হয় না। টাকা পাঠানো সফল হলে আপনার মোবাইলে কনফার্মেশন SMS পৌঁছে যাবে।</span>
+            </div>
+
+            <button class="btn-full" id="btn-submit-withdraw" style="background:var(--bkash); color:#fff;" onclick="submitWithdrawal(false)">
+                উত্তোলনের অনুরোধ পাঠান
+            </button>
+
+            <button class="btn-full" style="background:transparent; border:1.5px solid var(--primary); color:var(--primary);" onclick="submitWithdrawal(true)">
+                ⚡ সরাসরি টাকা পাঠান ও মোবাইলে SMS মেসেজ দেখুন
+            </button>
+        </div>
+    </main>
+
+    <!-- Prophet Biographies Screen -->
+    <main class="content-scroll" id="screen-prophets" style="display:none;">
+        <h3 class="section-title">পবিত্র কুরআনে উল্লেখিত নবীদের জীবনী</h3>
+        <div id="prophets-full-list" style="display:flex; flex-direction:column; gap:12px;">
+            <!-- Injected via JS -->
+        </div>
+    </main>
+
+    <!-- SMS Messages Inbox Screen -->
+    <main class="content-scroll" id="screen-inbox" style="display:none;">
+        <div class="section-header">
+            <h3 class="section-title">📨 মোবাইলে প্রাপ্ত পেমেন্ট SMS</h3>
+            <span style="font-size:12px; color:var(--primary); font-weight:700; cursor:pointer;" onclick="markAllRead()">সব পঠিত করুন</span>
+        </div>
+        <div id="sms-inbox-list" style="display:flex; flex-direction:column; gap:12px;">
+            <!-- Injected via JS -->
+        </div>
+    </main>
+
+    <!-- Admin Panel Screen -->
+    <main class="content-scroll" id="screen-admin" style="display:none;">
+        <h3 class="section-title">⚙️ অ্যাডমিন কন্ট্রোল প্যানেল</h3>
+        <div class="wallet-card" style="background:linear-gradient(135deg, #1B5E20, #0C5E28);">
+            <div style="font-size:12px; color:var(--gold);">রিওয়ার্ড রিজার্ভ ফান্ড পুল</div>
+            <div style="font-size:24px; font-weight:700; margin:4px 0;">৫০,০০০ টাকা</div>
+            <div style="font-size:12px; color:#D5F2DD;">বিতরণকৃত অর্থ: ৩,৪৫০ টাকা • প্রতারণা শনাক্তকরণ সক্রিয় ✓</div>
+        </div>
+
+        <div class="cta-card">
+            <h4 style="font-size:14px; margin-bottom:10px;">নীতিমালা ও সীমা কনফিগারেশন</h4>
+            <div class="form-group" style="margin-bottom:8px;">
+                <label class="form-label">প্রতি সঠিক উত্তরের রিওয়ার্ড (টাকা)</label>
+                <input type="number" class="form-input" id="admin-rate" value="10">
+            </div>
+            <div class="form-group" style="margin-bottom:12px;">
+                <label class="form-label">দৈনিক সর্বোচ্চ রিওয়ার্ড সীমা (টাকা)</label>
+                <input type="number" class="form-input" id="admin-daily-limit" value="100">
+            </div>
+            <button class="btn-full btn-primary" onclick="saveAdminSettings()">সংরক্ষণ করুন</button>
+        </div>
+    </main>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+        <button class="nav-item active" onclick="switchTab('home')" id="nav-home">
+            <span class="nav-icon">🏠</span>
+            <span>হোম</span>
+        </button>
+        <button class="nav-item" onclick="switchTab('quiz')" id="nav-quiz">
+            <span class="nav-icon">❓</span>
+            <span>কুইজ</span>
+        </button>
+        <button class="nav-item" onclick="switchTab('earnings')" id="nav-earnings">
+            <span class="nav-icon">📊</span>
+            <span>আজকের আয়</span>
+        </button>
+        <button class="nav-item" onclick="switchTab('withdraw')" id="nav-withdraw">
+            <span class="nav-icon">💸</span>
+            <span>উত্তোলন</span>
+        </button>
+        <button class="nav-item" onclick="switchTab('prophets')" id="nav-prophets">
+            <span class="nav-icon">📖</span>
+            <span>জীবনী</span>
+        </button>
+    </nav>
+</div>
+
+<!-- Simulated SMS Arrival Notification Modal -->
+<div class="modal-overlay" id="sms-modal">
+    <div class="modal-content">
+        <div style="text-align:center; margin-bottom:12px;">
+            <div style="font-size:40px; margin-bottom:4px;">🎉</div>
+            <h3 style="font-size:18px; font-weight:700; color:var(--success);">টাকা পাঠানো সফল হয়েছে!</h3>
+            <p style="font-size:12px; color:var(--text-muted);">আপনার মোবাইলে কনফার্মেশন এসএমএস পৌঁছে গেছে</p>
+        </div>
+
+        <div class="sms-bubble">
+            <div class="sms-header">
+                <span id="modal-sms-sender">bKash</span>
+                <span id="modal-sms-time">এইমাত্র</span>
+            </div>
+            <div id="modal-sms-body" style="color:#FFF;">
+                You have received Tk 100.00 from Nabider Quiz Reward. Fee Tk 0.00. TrxID BKH9842103. Have fun playing quiz!
+            </div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin:14px 0 16px; font-size:12px;">
+            <span style="color:var(--text-muted);">রেফারেন্স TrxID: <b id="modal-sms-trxid" style="color:var(--primary);">BKH9842103</b></span>
+            <span style="color:var(--success); font-weight:700;">✓ সফল</span>
+        </div>
+
+        <button class="btn-full btn-primary" onclick="closeModal()">ধন্যবাদ, ঠিক আছে</button>
+    </div>
+</div>
+
+<script>
+    // State
+    const state = {
+        isDemo: true,
+        balanceVisible: true,
+        demoBalance: 150,
+        liveBalance: 0,
+        todayEarned: 30,
+        todayAttempted: 4,
+        todayCorrect: 3,
+        totalCorrect: 15,
+        selectedGateway: 'bKash',
+        currentQuestionIndex: 0,
+        selectedOption: null,
+        isSubmitted: false,
+        claimedQuestions: new Set(['Q01', 'Q02', 'Q03']),
+        rewardPerQuestion: 10,
+        dailyLimit: 100,
+        messages: [
+            {
+                id: 'MSG-01',
+                gateway: 'bKash',
+                amount: 100,
+                account: '017****5678',
+                trxId: 'BKH903218',
+                time: 'গতকাল, ১০:১৫ PM',
+                text: 'You have received Tk 100.00 from Nabider Quiz Reward. Fee Tk 0.00. TrxID BKH903218. Have fun playing quiz!',
+                read: true
+            }
+        ],
+        transactions: [
+            { id: 'RW-89341011', title: 'সঠিক উত্তর রিওয়ার্ড (প্রশ্ন: Q03)', time: 'আজ, ১০:২০ AM', amount: 10, type: 'earned' },
+            { id: 'RW-89340982', title: 'সঠিক উত্তর রিওয়ার্ড (প্রশ্ন: Q02)', time: 'আজ, ০৯:৪০ AM', amount: 10, type: 'earned' },
+            { id: 'RW-89340761', title: 'সঠিক উত্তর রিওয়ার্ড (প্রশ্ন: Q01)', time: 'আজ, ০৯:১০ AM', amount: 10, type: 'earned' },
+            { id: 'WD-88129045', title: 'bKash ক্যাশ আউট সম্পন্ন', time: 'গতকাল, ১০:১৫ PM', amount: 100, type: 'withdraw' }
+        ]
+    };
+
+    const questions = [
+        {
+            id: 'Q01',
+            prophet: 'হযরত আদম (আ.)',
+            question: 'আল্লাহ তাআলা প্রথম মানব হযরত আদম (আ.)-কে কী দিয়ে সৃষ্টি করেছিলেন?',
+            options: ['নূর (আলো)', 'মাটি ও পানি', 'আগুন', 'বাতাস'],
+            correct: 1,
+            explanation: 'আল্লাহ সুবহানাহু ওয়া তাআলা আদম (আ.)-কে কাদামাটি থেকে নিপুণভাবে সৃষ্টি করেছেন (সূরা আস-সাজদাহ: ৭)।'
+        },
+        {
+            id: 'Q02',
+            prophet: 'হযরত আদম (আ.)',
+            question: 'জান্নাত থেকে পৃথিবীতে আসার পর হযরত আদম (আ.) ও হাওয়া (আ.) কোন দুআর মাধ্যমে ক্ষমা চেয়েছিলেন?',
+            options: ['রব্বানা আতিনা ফিদ দুনিয়া হাসানাতাহ', 'রব্বানা যালামনা আনফুসানা ওয়া ইল্লাম তাগফিরলানা...', 'লা ইলাহা ইল্লা আনতা সুবহানাকা', 'রব্বিজ আলনী মুক্বীমাস সালাতি'],
+            correct: 1,
+            explanation: 'সূরা আল-আরাফের ২৩ নম্বর আয়াতে আদম ও হাওয়া (আ.)-এর ঐতিহাসিক তাওবার কথা বর্ণিত হয়েছে।'
+        },
+        {
+            id: 'Q03',
+            prophet: 'হযরত নূহ (আ.)',
+            question: 'হযরত নূহ (আ.) তাঁর জাতিকে কত বছর তাওহীদের দিকে দাওয়াত দিয়েছিলেন?',
+            options: ['১০০ বছর', '৫০০ বছর', '৯৫০ বছর', '১২০০ বছর'],
+            correct: 2,
+            explanation: 'কুরআনে স্পষ্ট বলা হয়েছে নূহ (আ.) সাড়ে নয়শত (৯৫০) বছর দাওয়াত দেন (সূরা আল-আনকাবুত: ১৪)।'
+        },
+        {
+            id: 'Q04',
+            prophet: 'হযরত নূহ (আ.)',
+            question: 'মহাপ্লাবনের পর হযরত নূহ (আ.)-এর তৈরি কিস্তি কোন পর্বতের চূড়ায় নোঙর করেছিল?',
+            options: ['তূর পর্বত', 'জুদী পর্বত', 'হেরা পর্বত', 'সাফা পর্বত'],
+            correct: 1,
+            explanation: 'আল্লাহর নির্দেশে মহাপ্লাবনের পানি নেমে যাওয়ার পর কিস্তিখানা জুদী পাহাড়ের চূড়ায় থেমেছিল (সূরা হূদ: ৪৪)।'
+        },
+        {
+            id: 'Q05',
+            prophet: 'হযরত ইব্রাহিম (আ.)',
+            question: 'নমরুদ যখন হযরত ইব্রাহিম (আ.)-কে অগ্নিকুণ্ডে নিক্ষেপ করে, তখন আল্লাহ আগুনকে কী নির্দেশ দেন?',
+            options: ['আগুন নিভে যাও', 'হে আগুন! শীতল ও শান্তিদায়ক হয়ে যাও', 'আগুন নমরুদকে পুড়িয়ে দাও', 'আগুন বৃষ্টি হও'],
+            correct: 1,
+            explanation: 'ইরশাদ হয়েছে: ইয়া নারু কুনী বারদাও ওয়া সালামান আলা ইবরাহীম (সূরা আল-আম্বিয়া: ৬৯)।'
+        },
+        {
+            id: 'Q06',
+            prophet: 'হযরত মুহাম্মদ (সা.)',
+            question: 'রাসূলুল্লাহ (সা.)-এর ওপর হেরা গুহায় প্রথম কোন আয়াত নাযিল হয়?',
+            options: ['আলহামদু লিল্লাহি রব্বিল আলামীন', 'ইক্বরা বিসমি রব্বিকাল্লাযী খালাক্ব', 'কুল হুয়াল্লাহু আহাদ', 'ইয়া আইয়ুহাল মুদ্দাসসির'],
+            correct: 1,
+            explanation: 'হযরত জিবরাঈল (আ.) হেরা গুহায় সর্বপ্রথম সূরা আলাকের প্রথম পাঁচটি আয়াত নিয়ে আসেন।'
+        }
+    ];
+
+    const prophets = [
+        { name: 'হযরত আদম (আ.)', title: 'আবুল বাশার (মানবজাতির আদি পিতা)', era: 'সৃষ্টির প্রারম্ভ কাল', story: 'আল্লাহ তাআলা তাকে মাটি থেকে নিপুণভাবে সৃষ্টি করেন এবং তার মধ্যে রূহ ফুঁকে দেন। সৃষ্টির পর সমস্ত ফেরেশতাকে সেজদার নির্দেশ দেওয়া হয়...' },
+        { name: 'হযরত নূহ (আ.)', title: 'নাজিয়্যুল্লাহ (দ্বিতীয় আদম)', era: 'আদম (আ.) পরবর্তী যুগ', story: 'দীর্ঘ ৯৫০ বছর ধরে তাওহীদের দিকে আহ্বান জানান। মহাপ্লাবনের সময় কিস্তিতে মুমিনদের রক্ষা করেন...' },
+        { name: 'হযরত ইব্রাহিম (আ.)', title: 'খলিলুল্লাহ (আল্লাহর প্রিয় বন্ধু)', era: 'খ্রিস্টপূর্ব ২০০০ অব্দ', story: 'তাওহীদের উজ্জ্বল মশালবাহী, অগ্নিকুণ্ড থেকে অক্ষত রক্ষাপ্রাপ্ত এবং পবিত্র কাবা গৃহের পুনর্নির্মাতা...' },
+        { name: 'হযরত মুসা (আ.)', title: 'কালিমুল্লাহ', era: 'খ্রিস্টপূর্ব ১৩০০ অব্দ', story: 'তুর পাহাড়ে আল্লাহর সাথে সরাসরি কথোপকথনকারী, লোহিত সাগর অতিক্রমকারী এবং তাওরাত কিতাবপ্রাপ্ত নবী...' },
+        { name: 'হযরত মুহাম্মদ (সা.)', title: 'খাতামুন্নাবিয়্যীন ও রাহমাতুল্লিল আলামীন', era: '৫৭০ খ্রি. - ৬৩২ খ্রি.', story: 'সর্বশেষ ও সর্বশ্রেষ্ঠ রাসূল, মহাগ্রন্থ আল-কুরআন প্রাপ্ত এবং সমগ্র মানবজাতির মুক্তির দিশারী...' }
+    ];
+
+    function updateUI() {
+        const currentBal = state.isDemo ? state.demoBalance : state.liveBalance;
+        
+        // Balance visibility
+        if (state.balanceVisible) {
+            document.getElementById('balance-display').innerText = currentBal + ' টাকা';
+            document.getElementById('withdrawable-display').innerText = '💸 উত্তোলনযোগ্য: ' + currentBal + ' টাকা';
+            document.getElementById('today-earned-display').innerText = state.todayEarned + ' টাকা';
+            document.getElementById('eye-btn').innerText = '👁️';
+        } else {
+            document.getElementById('balance-display').innerText = '••••••';
+            document.getElementById('withdrawable-display').innerText = '💸 উত্তোলনযোগ্য: ••••';
+            document.getElementById('today-earned-display').innerText = '•••';
+            document.getElementById('eye-btn').innerText = '🙈';
+        }
+
+        document.getElementById('today-correct-display').innerText = state.todayCorrect + 'টি';
+        document.getElementById('withdraw-balance-val').innerText = currentBal + ' টাকা';
+
+        // Progress bar
+        const pct = Math.min(100, Math.round((state.todayCorrect / 10) * 100));
+        document.getElementById('home-progress-bar').style.width = pct + '%';
+        document.getElementById('progress-text').innerText = state.todayCorrect + '/১০ সঠিক';
+        document.getElementById('progress-pct').innerText = pct + '%';
+
+        // Mode badge
+        const badge = document.getElementById('mode-badge');
+        const modeText = document.getElementById('mode-text');
+        const withdrawTag = document.getElementById('withdraw-mode-tag');
+        if (state.isDemo) {
+            badge.className = 'mode-badge';
+            modeText.innerText = 'ডেমো মোড (ভার্চুয়াল)';
+            withdrawTag.innerText = 'ডেমো মোড (ভার্চুয়াল)';
+        } else {
+            badge.className = 'mode-badge live';
+            modeText.innerText = 'লাইভ রিওয়ার্ড (বাস্তব)';
+            withdrawTag.innerText = 'লাইভ রিওয়ার্ড (বাস্তব)';
+        }
+
+        // Render current quiz question
+        renderQuiz();
+        // Render transactions
+        renderTransactions();
+        // Render prophets
+        renderProphets();
+        // Render SMS messages
+        renderSmsInbox();
+
+        // Unread SMS counter
+        const unread = state.messages.filter(m => !m.read).length;
+        document.getElementById('unread-count').innerText = unread;
+        document.getElementById('unread-count').style.display = unread > 0 ? 'flex' : 'none';
+    }
+
+    function toggleBalanceVisibility() {
+        state.balanceVisible = !state.balanceVisible;
+        updateUI();
+    }
+
+    function toggleMode() {
+        state.isDemo = !state.isDemo;
+        updateUI();
+        alert(state.isDemo ? 'ডেমো মোড সক্রিয় হয়েছে (ভার্চুয়াল ব্যালেন্স)।' : 'লাইভ রিওয়ার্ড মোড সক্রিয় হয়েছে (বাস্তব ফান্ড)।');
+    }
+
+    function switchTab(tab) {
+        const screens = ['home', 'quiz', 'earnings', 'withdraw', 'prophets', 'inbox', 'admin'];
+        screens.forEach(s => {
+            const el = document.getElementById('screen-' + s);
+            if (el) el.style.display = s === tab ? 'flex' : 'none';
+        });
+
+        // Bottom nav highlights
+        document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+        const activeNav = document.getElementById('nav-' + tab);
+        if (activeNav) activeNav.classList.add('active');
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Quiz functions
+    function renderQuiz() {
+        const q = questions[state.currentQuestionIndex];
+        document.getElementById('quiz-q-num').innerText = `প্রশ্ন ${state.currentQuestionIndex + 1} / ${questions.length}`;
+        document.getElementById('quiz-prophet-badge').innerText = q.prophet;
+        document.getElementById('quiz-question-text').innerText = q.question;
+
+        const isClaimed = state.claimedQuestions.has(q.id);
+        const rewardTag = document.getElementById('quiz-reward-tag');
+        if (isClaimed) {
+            rewardTag.className = 'reward-tag claimed';
+            rewardTag.innerText = 'ক্লেইমড (১০৳)';
+        } else {
+            rewardTag.className = 'reward-tag';
+            rewardTag.innerText = '+১০ টাকা রিওয়ার্ড';
+        }
+
+        const container = document.getElementById('quiz-options-container');
+        container.innerHTML = '';
+        const letters = ['ক', 'খ', 'গ', 'ঘ'];
+
+        q.options.forEach((opt, idx) => {
+            const optDiv = document.createElement('div');
+            optDiv.className = 'option-item';
+            if (state.selectedOption === idx) optDiv.classList.add('selected');
+
+            if (state.isSubmitted) {
+                if (idx === q.correct) optDiv.classList.add('correct');
+                else if (state.selectedOption === idx) optDiv.classList.add('wrong');
+            }
+
+            optDiv.onclick = () => {
+                if (!state.isSubmitted) {
+                    state.selectedOption = idx;
+                    renderQuiz();
+                }
+            };
+
+            optDiv.innerHTML = `
+                <div class="option-letter">${letters[idx]}</div>
+                <div style="font-size:14px; flex:1;">${opt}</div>
+            `;
+            container.appendChild(optDiv);
+        });
+
+        const expBox = document.getElementById('quiz-explanation');
+        const submitBtn = document.getElementById('btn-submit-quiz');
+        const nextBtn = document.getElementById('btn-next-quiz');
+
+        if (state.isSubmitted) {
+            expBox.style.display = 'block';
+            expBox.innerHTML = `<b>ব্যাখ্যা:</b> ${q.explanation}`;
+            submitBtn.style.display = 'none';
+            nextBtn.style.display = 'block';
+        } else {
+            expBox.style.display = 'none';
+            submitBtn.style.display = 'block';
+            nextBtn.style.display = 'none';
+        }
+    }
+
+    function submitAnswer() {
+        if (state.selectedOption === null) {
+            alert('অনুগ্রহ করে একটি অপশন নির্বাচন করুন।');
+            return;
+        }
+
+        state.isSubmitted = true;
+        const q = questions[state.currentQuestionIndex];
+        state.todayAttempted += 1;
+
+        if (state.selectedOption === q.correct) {
+            state.todayCorrect += 1;
+            state.totalCorrect += 1;
+
+            if (!state.claimedQuestions.has(q.id)) {
+                state.claimedQuestions.add(q.id);
+                state.todayEarned += state.rewardPerQuestion;
+                if (state.isDemo) state.demoBalance += state.rewardPerQuestion;
+                else state.liveBalance += state.rewardPerQuestion;
+
+                state.transactions.unshift({
+                    id: 'RW-' + Math.floor(10000000 + Math.random() * 90000000),
+                    title: `সঠিক উত্তর রিওয়ার্ড (প্রশ্ন: ${q.id})`,
+                    time: 'এইমাত্র',
+                    amount: state.rewardPerQuestion,
+                    type: 'earned'
+                });
+
+                alert(`মাশাআল্লাহ! সঠিক উত্তর হয়েছে। +${state.rewardPerQuestion} টাকা রিওয়ার্ড যোগ হয়েছে!`);
+            } else {
+                alert('সঠিক উত্তর হয়েছে! এই প্রশ্নের রিওয়ার্ড আপনি আগেই গ্রহণ করেছেন।');
+            }
+        } else {
+            alert('উত্তরটি সঠিক হয়নি। ব্যাখ্যাটি পড়ে পরবর্তী প্রশ্ন চেষ্টা করুন।');
+        }
+
+        updateUI();
+    }
+
+    function nextQuestion() {
+        state.currentQuestionIndex = (state.currentQuestionIndex + 1) % questions.length;
+        state.selectedOption = null;
+        state.isSubmitted = false;
+        renderQuiz();
+    }
+
+    // Withdrawal & Instant SMS Dispatch
+    function selectGateway(gw) {
+        state.selectedGateway = gw;
+        ['bkash', 'nagad', 'rocket'].forEach(g => {
+            const el = document.getElementById('gw-' + g);
+            if (el) el.classList.remove('active');
+        });
+
+        const activeEl = document.getElementById('gw-' + gw.toLowerCase());
+        if (activeEl) activeEl.classList.add('active');
+
+        const label = document.getElementById('acc-label');
+        const submitBtn = document.getElementById('btn-submit-withdraw');
+
+        if (gw === 'bKash') {
+            label.innerText = '২. বিকাশ অ্যাকাউন্ট নম্বর (১১ ডিজিট)';
+            submitBtn.style.background = 'var(--bkash)';
+        } else if (gw === 'Nagad') {
+            label.innerText = '২. নগদ অ্যাকাউন্ট নম্বর (১১ ডিজিট)';
+            submitBtn.style.background = 'var(--nagad)';
+        } else {
+            label.innerText = '২. রকেট অ্যাকাউন্ট নম্বর (১১ ডিজিট)';
+            submitBtn.style.background = 'var(--rocket)';
+        }
+    }
+
+    function setWithdrawAmt(amt) {
+        document.getElementById('withdraw-amount').value = amt;
+        document.querySelectorAll('.amount-chip').forEach(c => {
+            c.classList.toggle('active', c.innerText.includes(amt));
+        });
+    }
+
+    function submitWithdrawal(isInstant) {
+        const phone = document.getElementById('withdraw-phone').value.trim();
+        const amt = parseInt(document.getElementById('withdraw-amount').value) || 0;
+        const currentBal = state.isDemo ? state.demoBalance : state.liveBalance;
+
+        if (phone.length !== 11 || !phone.startsWith('01')) {
+            alert('সঠিক ১১ ডিজিটের মোবাইল নম্বর দিন (যেমন: 017xxxxxxxx)');
+            return;
+        }
+        if (amt < 100) {
+            alert('সর্বনিম্ন উত্তোলনের পরিমাণ ১০০ টাকা।');
+            return;
+        }
+        if (amt > currentBal) {
+            alert('আপনার ব্যালেন্স অপর্যাপ্ত!');
+            return;
+        }
+
+        const masked = phone.substring(0, 3) + '****' + phone.substring(phone.length - 4);
+        const prefix = state.selectedGateway === 'bKash' ? 'BKH' : (state.selectedGateway === 'Nagad' ? 'NGD' : 'RKT');
+        const trxId = prefix + Math.floor(1000000 + Math.random() * 9000000);
+        const nowTime = new Date().toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' });
+
+        if (state.isDemo) state.demoBalance -= amt;
+        else state.liveBalance -= amt;
+
+        // Generate authentic SMS text
+        let smsText = '';
+        if (state.selectedGateway === 'bKash') {
+            smsText = `You have received Tk ${amt}.00 from Nabider Quiz Reward. Fee Tk 0.00. TrxID ${trxId} at ${nowTime}. Have fun playing quiz!`;
+        } else if (state.selectedGateway === 'Nagad') {
+            smsText = `Cash In Tk ${amt}.00 from Nabider Quiz successful. Fee Tk 0.00. TxnID: ${trxId} at ${nowTime}. Thank you!`;
+        } else {
+            smsText = `Tk ${amt}.00 received from Nabider Quiz to ${masked}. Fee Tk 0.00. TrxID ${trxId} at ${nowTime}.`;
+        }
+
+        // Add to SMS Inbox
+        state.messages.unshift({
+            id: 'MSG-' + Math.floor(1000 + Math.random() * 9000),
+            gateway: state.selectedGateway,
+            amount: amt,
+            account: masked,
+            trxId: trxId,
+            time: 'এইমাত্র',
+            text: smsText,
+            read: false
+        });
+
+        // Add transaction
+        state.transactions.unshift({
+            id: 'WD-' + Math.floor(10000000 + Math.random() * 90000000),
+            title: `${state.selectedGateway} ক্যাশ আউট সম্পন্ন`,
+            time: 'এইমাত্র',
+            amount: amt,
+            type: 'withdraw'
+        });
+
+        updateUI();
+
+        // Trigger SMS Modal
+        document.getElementById('modal-sms-sender').innerText = state.selectedGateway;
+        document.getElementById('modal-sms-body').innerText = smsText;
+        document.getElementById('modal-sms-trxid').innerText = trxId;
+        document.getElementById('sms-modal').classList.add('active');
+    }
+
+    function closeModal() {
+        document.getElementById('sms-modal').classList.remove('active');
+    }
+
+    function renderTransactions() {
+        const container = document.getElementById('transactions-list');
+        if (!container) return;
+        container.innerHTML = '';
+
+        state.transactions.forEach(tx => {
+            const card = document.createElement('div');
+            card.className = 'cta-card';
+            card.style.display = 'flex';
+            card.style.justifyContent = 'space-between';
+            card.style.alignItems = 'center';
+            card.style.padding = '12px 14px';
+
+            const isEarned = tx.type === 'earned';
+            card.innerHTML = `
+                <div>
+                    <div style="font-size:13px; font-weight:700;">${tx.title}</div>
+                    <div style="font-size:10px; color:var(--text-muted);">${tx.id} • ${tx.time}</div>
+                </div>
+                <div style="font-size:14px; font-weight:700; color:${isEarned ? 'var(--success)' : 'var(--danger)'};">
+                    ${isEarned ? '+' : '-'}${tx.amount} ৳
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function renderProphets() {
+        const container = document.getElementById('prophets-full-list');
+        if (!container) return;
+        container.innerHTML = '';
+
+        prophets.forEach(p => {
+            const card = document.createElement('div');
+            card.className = 'cta-card';
+            card.innerHTML = `
+                <span class="prophet-era">${p.era}</span>
+                <h4 style="font-size:16px; font-weight:700; color:var(--primary); margin:4px 0 2px;">${p.name}</h4>
+                <div style="font-size:12px; color:var(--gold-dark); font-weight:600; margin-bottom:6px;">${p.title}</div>
+                <p style="font-size:12px; line-height:1.5; color:var(--text-muted);">${p.story}</p>
+                <button class="cta-btn" style="margin-top:10px;" onclick="switchTab('quiz')">এই নবীর কুইজ খেলুন (+১০৳)</button>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function renderSmsInbox() {
+        const container = document.getElementById('sms-inbox-list');
+        if (!container) return;
+        container.innerHTML = '';
+
+        state.messages.forEach(msg => {
+            const card = document.createElement('div');
+            card.className = 'cta-card';
+            card.innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                    <div style="font-weight:700; color:var(--primary); font-size:13px;">${msg.gateway} পেমেন্ট কনফার্মেশন</div>
+                    <span style="font-size:10px; color:var(--text-muted);">${msg.time}</span>
+                </div>
+                <div class="sms-bubble">
+                    <div style="color:#FFF;">${msg.text}</div>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; font-size:11px;">
+                    <span style="color:var(--text-muted);">TrxID: <b>${msg.trxId}</b></span>
+                    <button class="cta-btn" style="padding:3px 8px; font-size:10px;" onclick="copyText('${msg.trxId}')">কপি TrxID</button>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function markAllRead() {
+        state.messages.forEach(m => m.read = true);
+        updateUI();
+        alert('সকল মেসেজ পঠিত হিসেবে চিহ্নিত করা হয়েছে।');
+    }
+
+    function copyText(txt) {
+        navigator.clipboard.writeText(txt).then(() => {
+            alert('TrxID কপি হয়েছে: ' + txt);
+        });
+    }
+
+    function saveAdminSettings() {
+        const rate = parseInt(document.getElementById('admin-rate').value) || 10;
+        const limit = parseInt(document.getElementById('admin-daily-limit').value) || 100;
+        state.rewardPerQuestion = rate;
+        state.dailyLimit = limit;
+        alert('অ্যাডমিন সেটিংস সংরক্ষিত হয়েছে!');
+        updateUI();
+    }
+
+    // Initialize on load
+    updateUI();
+</script>
+
+</body>
+</html>
